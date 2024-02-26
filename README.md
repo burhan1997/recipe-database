@@ -44,14 +44,51 @@ RecipeDirections table is used to associate each step of a recipe with the recip
 
 Directions entity captures the core details of each direction or step in a recipe, including its unique identifier (`direction_id`) and the actual instruction or step (`instruction`). Each direction is uniquely identified by its `direction_id`, and the `instruction` column stores the instruction or step itself. This table can be used to associate directions with recipes in the RecipeDirections table, which maps which directions are used in which recipes.
 
-
 ### Relationships and Cardinalities
 
-Recipes and Recipe Directions
+#### Recipes and Recipe Directions
 
-Recipes must have recipe directions. One recipe can have multiple recipe directions but one recipe direction can only applicable in the one recipe. 
+- **Description**: Recipes must have recipe directions. One recipe can have multiple recipe directions, but one recipe direction can only be applicable to one recipe.
+- **Relationship Type**: One-to-Many
+- **Foreign Keys**: `recipe_id` (References Recipes), `direction_id` (References Directions)
+- **Attributes**: `step_number`
 
-Recipe directions use recipe_id and direction_id as a foreign key. It has also step_number attribute.
+#### Recipes and Recipe Categories
 
-Recipes and Recipe Categories
+- **Description**: Every recipe must have one or more recipe categories, and every recipe category must belong to a recipe. They have a many-to-many relationship.
+- **Relationship Type**: Many-to-Many
+- **Junction Table**: RecipeCategories
+- **Foreign Keys**: `recipe_id` (References Recipes), `category_id` (References Categories)
 
+#### Recipe Categories and Categories
+
+- **Description**: Every recipe category must belong to a category, and every category can have multiple recipe categories associated with it. They have a many-to-many relationship.
+- **Relationship Type**: Many-to-Many
+- **Junction Table**: RecipeCategories
+- **Foreign Keys**: `category_id` (References Categories)
+
+#### Recipe and Ingredients
+
+- **Description**: Recipes must contain ingredients, and ingredients must belong to a recipe. A recipe should contain more than one ingredient. They have a many-to-many relationship.
+- **Relationship Type**: Many-to-Many
+- **Junction Table**: RecipeIngredients
+- **Foreign Keys**: `recipe_id` (References Recipes), `ingredient_id` (References Ingredients)
+
+#### Recipe Ingredients
+
+- **Description**: This entity must be part of the Recipes and Ingredients entities.
+- **Relationship Type**: Many-to-Many
+- **Junction Table**: RecipeIngredients
+- **Foreign Keys**: `recipe_id` (References Recipes), `ingredient_id` (References Ingredients)
+
+#### Recipes and Recipe Directions
+
+- **Description**: Every recipe must have more than one recipe direction, and recipe directions can belong to one recipe. Because they do not have a common recipe, they have a one-to-many relationship.
+- **Relationship Type**: One-to-Many
+- **Foreign Keys**: `recipe_id` (References Recipes)
+
+#### Recipe Directions and Directions
+
+- **Description**: Every direction must include a recipe direction, and every recipe direction must include a direction. They have a one-to-one relationship.
+- **Relationship Type**: One-to-One
+- **Foreign Keys**: `direction_id` (References Directions)
