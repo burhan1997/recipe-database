@@ -1,10 +1,10 @@
 -- Inserting test data into the Recipes table
-INSERT INTO Recipes (recipe_id, recipe_name, cooking_time, preparation_time, spiciness) VALUES
-(1, 'Spaghetti Carbonara', 30, 15, 2),
+INSERT INTO Recipes (recipe_id, recipe_name, cooking_time, preparation_time, spiciness_id) VALUES
+(1, 'Spaghetti Carbonara', 30, 15, 3),
 (2, 'Margherita Pizza', 20, 30, 1),
-(3, 'Chicken Curry', 40, 20, 4),
-(4, 'No-Bake Cheesecake', 0, 180, 1),
-(5, 'Roasted Brussels Sprouts', 30, 10, 1),
+(3, 'Chicken Curry', 40, 20, 6),
+(4, 'Cheesecake', 0, 180, 1),
+(5, 'Roasted Brussels Sprouts', 30, 10, 5),
 (6, 'Mac & Cheese', 20, 10, 1),
 (7, 'Tamagoyaki Japanese Omelette', 10, 5, 1);
 
@@ -82,6 +82,41 @@ INSERT INTO Directions (direction_id, instruction) VALUES
 (36, 'Let is cook for 1\''),
 (37, 'Remove pan from fire');
 
+-- Inserting test data into the Spiciness table
+INSERT INTO Spiciness (spiciness_id, spiciness_name) VALUES
+(1, 'Mild'),
+(2, 'Little Hot'),
+(3, 'Medium Hot'),
+(4, 'Hot'),
+(5, 'Extra Hot'),
+(6, 'Inferno');
+
+-- Inserting test data into the Categories table
+INSERT INTO Categories (category_id, category_name) VALUES
+(1, 'Italian'),
+(2, 'Fast Food'),
+(3, 'Indian'),
+(4, 'No-Bake'),
+(5, 'Japanese'),
+(6, 'Vegetarian'),
+(7, 'Cake'),
+(8, 'Vegan'),
+(9, 'Gluten-free');
+
+-- Inserting test data into the RecipeCategories table
+INSERT INTO RecipeCategories (recipe_id, category_id) VALUES
+(1, 1),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(4, 6),
+(7, 5),
+(7, 6),
+(4, 7),
+(5, 8),
+(5, 9),
+(6, 6);
 
 -- Inserting test data into the RecipeDirections table
 INSERT INTO RecipeDirections (recipe_id, direction_id, step_number) VALUES
@@ -123,70 +158,56 @@ INSERT INTO RecipeDirections (recipe_id, direction_id, step_number) VALUES
 (7, 36, 9),
 (7, 37, 10);
 
--- Inserting test data into the Categories table
-INSERT INTO Categories (category_id, category_name) VALUES
-(1, 'Italian'),
-(2, 'Fast Food'),
-(3, 'Indian'),
-(4, 'No-Bake'),
-(5, 'Japanese'),
-(6, 'Vegetarian'),
-(7, 'Cake'),
-(8, 'Vegan'),
-(9, 'Gluten-free');
-
--- Inserting test data into the RecipeCategories table
-INSERT INTO RecipeCategories (recipe_id, category_id) VALUES
-(1, 1),
-(2, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(4, 6), 
-(7, 5),
-(7, 6),
-(4, 7), 
-(5, 8),
-(5, 9),
-(6, 6); 
-
 -- Inserting test data into the RecipeIngredients table
-INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity, unit, prep_type) VALUES
-(1, 1, 100, 'grams', 'None'),
-(1, 2, 50, 'grams', 'Sliced'),
-(1, 3, 2, 'units', 'None'),
-(1, 4, 50, 'grams', 'Shredded'),
-(2, 5, 100, 'grams', 'None'),
-(2, 6, 1, 'unit', 'None'),
-(2, 7, 100, 'grams', 'Sliced'),
-(2, 8, 5, 'leaves', 'None'),
-(3, 9, 200, 'grams', 'Cubed'),
-(3, 10, 2, 'tablespoons', 'None'),
-(3, 11, 400, 'ml', 'None'),
-(4, 12, 1, 'can', 'None'),
-(4, 13, 400, 'grams', 'None'),
-(4, 14, 1, 'unit', 'None'),
-(4, 15, 1, 'unit', 'None'),
-(4, 16, 1, 'jar', 'None'),
-(5, 17, 200, 'grams', 'None'),
-(5, 18, 1, 'unit', 'None'),
-(5, 19, 1, 'cup', 'None'),
-(5, 28, 1, 'teaspoon', 'squeezed' ),
-(5, 29, 1,  'tablespoon', 'None'),
-(5, 26, 1, 'teaspoon', 'None'),
-(6, 22, 8, 'oz', 'Fresh'),
-(6, 23, 50, 'grams', 'Sliced'),
-(6, 26, 1, 'teaspoon', 'None'),
-(6, 20, 20, 'grams', 'None'),
-(6, 21, 5, 'Glass', 'None'),
-(6, 29, 3, 'teaspoon', 'None'),
-(6, 30, 1, 'Glass', 'None'),
-(7, 31, 2, 'piece', 'None'),
-(7, 24, 5, 'teaspoon', 'None'),
-(7, 25, 2, 'tablespoon', 'None'),
-(7, 26, 1, 'teaspoon', 'None'),
-(7, 19, 1, 'glass', 'None');
+INSERT INTO RecipeIngredients (recipe_id, ingredient_id, quantity, unit_id) VALUES
+(1, 1, 100, 1),
+(1, 2, 50, 1),
+(1, 3, 2, 3),
+(1, 4, 50, 1),
+(2, 5, 100, 1),
+(2, 6, 1, 3),
+(2, 7, 100, 1),
+(2, 8, 5, 3),
+(3, 9, 200, 1),
+(3, 10, 2, 4),
+(3, 11, 400, 5),
+(4, 12, 1, 6),
+(4, 13, 400, 1),
+(4, 14, 1, 3),
+(4, 15, 1, 3),
+(4, 16, 1, 7),
+(5, 17, 200, 1),
+(5, 18, 1, 3),
+(5, 19, 1, 8),
+(5, 28, 1, 9),
+(5, 29, 1, 4),
+(5, 26, 1, 9),
+(6, 22, 8, 10),
+(6, 23, 50, 1),
+(6, 26, 1, 9),
+(6, 20, 20, 1),
+(6, 21, 5, 11),
+(6, 29, 3, 9),
+(6, 30, 1, 11),
+(7, 31, 2, 12),
+(7, 24, 5, 9),
+(7, 25, 2, 4),
+(7, 26, 1, 9),
+(7, 19, 1, 13);
 
-
-
-
+-- Inserting test data into the Units table
+INSERT INTO Units (unit_id, unit_name) VALUES
+(1, 'grams'),
+(2, 'kilograms'),
+(3, 'leaves'),
+(4, 'tablespoons'),
+(5, 'ml'),
+(6, 'can'),
+(7, 'jar'),
+(8, 'cup'),
+(9, 'teaspoon'),
+(10, 'oz'),
+(11, 'Glass'),
+(12, 'piece'),
+(13, 'glass'),
+(14, 'liter');
