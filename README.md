@@ -1,4 +1,4 @@
-# Recipe Database
+# Recipe Database Prep Exercise
 
 ## EER Diagram with Chen Notation
 ![Recipe Database EER Diagram](Eer-Diagrams/recipe-database-eer.png)
