@@ -92,3 +92,22 @@ Directions entity captures the core details of each direction or step in a recip
 - **Description**: Every direction must include a recipe direction, and every recipe direction must include a direction. They have a one-to-one relationship.
 - **Relationship Type**: One-to-One
 - **Foreign Keys**: `direction_id` (References Directions)
+
+
+
+## Discussion
+
+If we want to add thousands of recipes to the database, what challenges do we foresee?
+
+1. **Performance**: The performance of the database may decrease as the number of records increases. Queries may take longer to execute, and the database may become slower to respond.
+
+2. **Storage**: The database may require a significant amount of storage space to accommodate thousands of recipes and related data, such as ingredients, directions, categories, and their relationships.
+
+3. **Data Integrity**: Ensuring data integrity becomes more challenging with a larger volume of data. Data duplication, inconsistencies, and errors may arise, leading to data quality issues.
+
+4. **Indexing**: Proper indexing becomes crucial to maintain query performance as the database grows. Without appropriate indexes, queries may become slower, affecting the user experience.
+
+5. **Concurrency**: With a large number of users accessing and modifying the database simultaneously, ensuring concurrency control becomes more critical. Locking and transaction management need to be handled efficiently to avoid conflicts and maintain data consistency.
+
+6. **Scaling**: As the database grows, scaling becomes an important consideration. So horizontal scaling (distributing the data across multiple servers) may be necessary.
+
